@@ -1,0 +1,148 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="card-body">
+      <!-- Login Form -->
+      <div *ngIf="isLogIn">
+        <h3 class="mb-4">Login</h3>
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
+          <!-- Emial Field -->
+          <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" formControlName="email" [ngClass]="{
+                  'is-invalid':
+                    loginForm.get('email')?.invalid &&
+                    loginForm.get('email')?.touched
+                }" placeholder="Enter Email" />
+            <div *ngIf="
+                  (loginForm.get('email')?.invalid &&
+                    loginForm.get('email')?.touched) ||
+                  loginForm.get('email')?.dirty
+                ">
+              <small *ngIf="loginForm.get('email')?.errors?.['required']" class="text-danger">Email is required</small>
+              <small *ngIf="loginForm.get('email')?.errors?.['pattern']" class="text-danger">Please provide a valid
+                email address</small>
+            </div>
+          </div>
+          <!-- Password Field -->
+          <div class="form-group mb-4">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{
+                  'is-invalid':
+                    loginForm.get('password')?.invalid &&
+                    loginForm.get('password')?.touched
+                }" placeholder="Enter password" />
+            <div *ngIf="
+                  loginForm.get('password')?.invalid &&
+                  loginForm.get('password')?.touched
+                " class="text-danger">
+              Password is required.
+            </div>
+            <div *ngIf="
+                  (loginForm.get('password')?.invalid &&
+                    loginForm.get('password')?.touched) ||
+                  loginForm.get('password')?.dirty
+                ">
+              <small *ngIf="loginForm.get('password')?.errors?.['required']" class="text-danger">Password is
+                required</small>
+              <small *ngIf="loginForm.get('password')?.errors?.['minlength']" class="text-danger">Password atleast 8
+                char length</small>
+            </div>
+          </div>
+          <!-- Submit Button -->
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+                Login
+              </button>
+            </div>
+
+          </div>
+        </form>
+        <div class="row mt-1">
+          <div class="col-12">
+            <button class="btn btn-success" (click)="onRegistor()">
+              Registor
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- Registor Form -->
+      <div *ngIf="!isLogIn">
+        <h3 class="mb-4">Registor</h3>
+        <form (ngSubmit)="onSubmitReg()" [formGroup]="registorForm">
+          <!-- Name Field -->
+          <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{
+                  'is-invalid':
+                    registorForm.get('name')?.invalid &&
+                    registorForm.get('name')?.touched
+                }" placeholder="Enter user name" />
+            <div *ngIf="
+                  registorForm.get('name')?.invalid &&
+                  registorForm.get('name')?.touched
+                " class="text-danger">
+              Name is required.
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="userName">Email</label>
+            <input type="text" class="form-control" id="email" (blur)="isEmailAlreadyEixst()" formControlName="email"
+              [ngClass]="{
+                  'is-invalid':
+                    registorForm.get('email')?.invalid &&
+                    registorForm.get('email')?.touched
+                }" placeholder="Enter email" />
+            <div *ngIf="
+                  (registorForm.get('email')?.invalid &&
+                    registorForm.get('email')?.touched) ||
+                  registorForm.get('email')?.dirty
+                ">
+              <small *ngIf="registorForm.get('email')?.errors?.['required']" class="text-danger">Email is
+                required</small>
+              <small *ngIf="registorForm.get('email')?.errors?.['pattern']" class="text-danger">Please provide a valid
+                email address</small>
+            </div>
+          </div>
+          <!-- Password Field -->
+          <div class="form-group mb-4">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{
+                  'is-invalid':
+                    registorForm.get('password')?.invalid &&
+                    registorForm.get('password')?.touched
+                }" placeholder="Enter password" />
+            <div *ngIf="
+                  (registorForm.get('password')?.invalid &&
+                    registorForm.get('password')?.touched) ||
+                  registorForm.get('password')?.dirty
+                ">
+              <small *ngIf="registorForm.get('password')?.errors?.['required']" class="text-danger">Password is
+                required</small>
+              <small *ngIf="registorForm.get('password')?.errors?.['minlength']" class="text-danger">Password atleast 8
+                char length</small>
+            </div>
+          </div>
+          <!-- Submit Button -->
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="registorForm.invalid">
+                Submit
+              </button>
+            </div>
+
+          </div>
+        </form>
+        <div class="row mt-1">
+          <div class="col-12">
+            <button class="btn btn-warning btn-block" (click)="registorCancelClick()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
