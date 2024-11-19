@@ -1,0 +1,49 @@
+.container1 {
+  margin-top: 15px;
+  box-shadow: 0 0 4px gray;
+  padding: 20px 15px 20px 15px;
+  border-radius: 10px;
+}
+
+.title-break {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.cursorpoint {
+  cursor: pointer;
+}
+
+.icon-text-group {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-right: 0.5rem;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.hight-img {
+  height: 300px;
+}
+
+.comment-label {
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.cardimg {
+  height: 150px;
+  width: 230px;
+}
+.column-height {
+  height: 150px;
+}

@@ -1,0 +1,21 @@
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-left: 10px;
+}
+
+.small-card {
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.small-card:hover {
+  transform: scale(1.05);
+}
+
+.cardimg {
+  height: 150px;
+  object-fit: cover;
+}

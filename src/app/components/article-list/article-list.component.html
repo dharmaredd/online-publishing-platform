@@ -1,0 +1,174 @@
+<div>
+  <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary navbar-height" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{ articleName }} </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarText">
+        <div class="search-hero w-50 pl-10 ml-10">
+          <input class="bi bi-search form-control textcolor search-input" type="text" name="search"
+            [(ngModel)]="searchText" autocomplete="off" placeholder="Search By Author" />
+        </div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"></li>
+        </ul>
+        <span class="navbar-text">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <span class="nav-link">
+                <i class="bi bi-bell position-relative me-4"><span
+                    class="position-absolute badge rounded rounded-circle bg-danger">2</span></i>
+              </span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/create-article">{{postarticle}}</a>
+            </li>
+          </ul>
+        </span>
+      </div>
+    </div>
+  </nav>
+</div>
+<div>
+  <div class="text-center mt-2 mb-2">
+    <input type="radio" (change)="handleFilter($event)" class="btn-check" value="ALL" name="options" id="all"
+      autocomplete="off" checked />
+    <label class="btn btn-outline-secondary me-2 label-border" for="all">All</label>
+    <input type="radio" (change)="handleFilter($event)" class="btn-check" value="BOOKMARK" name="options" id="bookmark"
+      autocomplete="off" />
+    <label class="btn btn-outline-secondary me-2 label-border" for="bookmark">Bookmark</label>
+
+    <input type="radio" (change)="handleFilter($event)" class="btn-check" value="POPULAR" name="options" id="popular"
+      autocomplete="off" />
+    <label class="btn btn-outline-secondary me-2 label-border" for="popular">Popular</label>
+  </div>
+</div>
+<div class="row mx-3">
+  <div class="col-9">
+    <div class="container list-scroll scroll-height" *ngIf="(artList$ | async) as articleList">
+      <div *ngIf="articleList | articleAuthorPipe : searchText as List">
+        <div class="d-flex justify-content-between"
+          *ngFor="let list of List | slice : 0 : (page + 1) * 10; let i = index">
+          <div class="card my-3 rounded">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-8">
+                  <h5 class="card-title title-break" data-toggle="tooltip" data-placement="bottom"
+                    title="{{ list.title }}" (click)="titleClick(list)">
+                    {{ list.title }}
+                  </h5>
+                  <div class="m-3 cursor-point description-height" (click)="titleClick(list)">
+                    <p class="card-text overflow-text fs-6">
+                      {{ list.description }}
+                    </p>
+                  </div>
+
+                  <div class="mx-3 mt-4 justify-content-between">
+                    <i *ngIf="!list.isBookmark" (click)="isBookMark(list)" class="bi bi-bookmark h5 cursor-point"></i>
+                    <i *ngIf="list.isBookmark" (click)="isBookMark(list)"
+                      class="bi bi-bookmark-fill h5 cursor-point"></i>
+
+                    <span class="float-end">
+                      <i class="bi bi-person-fill h4 me-2"></i>
+                      <span class="mb-2 fs-6 pb-4">{{
+                        list.author
+                        }}</span></span>
+                    <span class="float-end me-4">
+                      <i class="bi bi-eye-fill h4 me-2"></i>
+                      <span class="mb-2 fs-6 pb-4">{{ list.views }}</span></span>
+                    <span class="float-end me-4 cursor-point" (click)="commentClick(list)">
+                      <i class="bi bi-chat-left-text-fill h5 me-2"></i>{{ list.commentDetails.length }}
+                    </span>
+                  </div>
+                </div>
+                <div class="col-4 ml-4">
+                  <img [src]="list.image" width="250" height="150" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-20" *ngIf="List.length === 0">
+          <h3 class="text-center text-success">No Data Found !</h3>
+        </div>
+        <div class="m-3 text-center">
+          <button class="bi bi-arrow-down btn btn-primary w-25 p-2 label-border"
+            *ngIf="(page + 1) * 10 < articleList.length && List.length > 0" (click)="page = page + 1">
+            Show more
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="row mb-4">
+      <div class="text-center">
+        <button class="bi bi-arrow-right btn btn-primary w-100 label-border" (click)="exploreClick()">
+          Explore More..
+        </button>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="../../assets/images/img.jpg" class="d-block w-100" alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src="../../assets/images/img1.webp" class="d-block w-100" alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src="../../assets/images/img2.jpg" class="d-block w-100" alt="..." />
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <h5>The AI Advantage: How Artificial Intelligence is Shaping Our World</h5>
+      <p>AI is expected to improve industries like healthcare, manufacturing and customer service, leading to
+        higher-quality experiences for both workers and customers.</p>
+    </div>
+  </div>
+</div>
+
+<!-- comment Modal View -->
+<div class="modal" #commentPopup>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Comments</h1>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closePopup()"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group comment-label ">
+          <label for="comment">Comment:</label>
+          <div *ngFor="let data of commentData?.commentDetails" class="pb-3">
+            <textarea class="form-control" disabled readonly [value]="data.comment" rows="3" id="comment"></textarea>
+          </div>
+          <div class="form-group" [formGroup]="commentFormGroup">
+            <label for="description">Comment</label>
+            <textarea id="description" formControlName="comment" class="form-control" maxlength="1400"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" [disabled]="commentFormGroup.get('comment')?.value === ''"
+          (click)="commentSubmit()">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,13 +33,29 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@kolkov/angular-editor/assets/",
+                "output": "./assets/fonts/"
               }
             ],
-            "styles": [
-              "src/styles.css"
+           "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "node_modules/ngx-toastr/toastr.css" 
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -102,5 +118,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a40de442-ac40-48dc-9275-c1720424e847"
   }
 }

@@ -1,0 +1,11 @@
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 450px !important;
+}
+.form-group.required .control-label:after {
+  color: #d00;
+  content: "*";
+}
+
+.cursor-point {
+  cursor: pointer;
+}

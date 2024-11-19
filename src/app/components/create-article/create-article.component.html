@@ -1,0 +1,56 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="row ">
+      <div class="col-10">
+        <h3><i class="bi bi-arrow-left me-3 cursor-point" title="Back" (click)="cancel()"></i>Create Article</h3>
+
+      </div>
+      <div class="col-1">
+        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
+      <div class="col-1">
+        <button class="btn btn-primary ml-4 mr-4" [disabled]="articleForm.invalid" (click)="submit()">
+          Submit
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row m-4">
+    <form [formGroup]="articleForm">
+      <div class="row pb-3">
+        <div class="col-6">
+          <div class="form-group required">
+            <label class="control-label">Title</label>
+            <input type="text" class="form-control" formControlName="title" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group required">
+            <label class="control-label">Description</label>
+            <input type="text" class="form-control" formControlName="description" />
+          </div>
+        </div>
+      </div>
+      <div class="row pb-3">
+        <div class="col-6">
+          <div class="form-group required">
+            <label class="control-label">Auther</label>
+            <input type="text" class="form-control" formControlName="author" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group required">
+            <label class="control-label">Thumbnail Image Upload</label><br />
+            <img [src]="articleForm.get('image')?.value" width="25" height="25" class="me-2" />
+            <input type="file" class="form-control-file" (change)="onSelectFile($event)" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <angular-editor formControlName="article" [config]="config"></angular-editor>
+      </div>
+    </form>
+  </div>
+</div>
