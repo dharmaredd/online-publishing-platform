@@ -41,12 +41,14 @@ export class CreateArticleComponent implements OnInit {
       },
     ],
   };
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private store: Store<AppState>,
     private toastr: ToastrService
   ) {}
+
   ngOnInit() {
     this.articleForm = this.fb.group({
       id: [],
@@ -57,9 +59,11 @@ export class CreateArticleComponent implements OnInit {
       article: ['', Validators.required],
     });
   }
+
   cancel() {
     this.router.navigate(['/list']);
   }
+
   submit() {
     let data: any;
     this.store.select(articleListData).subscribe((res) => {
@@ -74,6 +78,7 @@ export class CreateArticleComponent implements OnInit {
     this.toastr.success('Sucess', 'Article Added Sucessfully!!');
     this.cancel();
   }
+
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();

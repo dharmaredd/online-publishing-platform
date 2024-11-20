@@ -16,7 +16,6 @@ describe('ArticleAuthorPipePipe', () => {
       { author: 'Alice', title: 'Article 1' },
       { author: 'Bob', title: 'Article 2' },
     ];
-
     expect(pipe.transform(articles)).toEqual(articles);
   });
 
@@ -26,7 +25,6 @@ describe('ArticleAuthorPipePipe', () => {
       { author: 'Bob', title: 'Article 2' },
       { author: 'Charlie', title: 'Article 3' },
     ];
-
     const filtered = pipe.transform(articles, 'Bob');
     expect(filtered).toEqual([{ author: 'Bob', title: 'Article 2' }]);
   });
@@ -37,7 +35,6 @@ describe('ArticleAuthorPipePipe', () => {
       { author: 'Bob', title: 'Article 2' },
       { author: 'Charlie', title: 'Article 3' },
     ];
-
     const filtered = pipe.transform(articles, 'alice');
     expect(filtered).toEqual([{ author: 'Alice', title: 'Article 1' }]);
   });
@@ -47,14 +44,12 @@ describe('ArticleAuthorPipePipe', () => {
       { author: 'Alice', title: 'Article 1' },
       { author: 'Bob', title: 'Article 2' },
     ];
-
     const filtered = pipe.transform(articles, 'John');
     expect(filtered).toEqual([]);
   });
 
   it('should handle an empty array gracefully', () => {
     const articles: any[] = [];
-
     const filtered = pipe.transform(articles, 'Alice');
     expect(filtered).toEqual([]);
   });

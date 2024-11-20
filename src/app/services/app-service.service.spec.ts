@@ -15,7 +15,6 @@ describe('AppService', () => {
       imports: [HttpClientTestingModule],
       providers: [AppService],
     });
-
     service = TestBed.inject(AppService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
@@ -33,11 +32,9 @@ describe('AppService', () => {
       username: 'testUser',
       roles: ['admin', 'user'],
     };
-
     service.getLoginData().subscribe((data) => {
       expect(data).toEqual(mockLoginData);
     });
-
     const req = httpTestingController.expectOne(
       '../assets/json/login-data.json'
     );
@@ -70,11 +67,9 @@ describe('AppService', () => {
         image: '',
       },
     ];
-
     service.getList().subscribe((data) => {
       expect(data).toEqual(mockArticleList);
     });
-
     const req = httpTestingController.expectOne('../assets/json/list.json');
     expect(req.request.method).toBe('GET');
     req.flush(mockArticleList);
@@ -82,11 +77,9 @@ describe('AppService', () => {
 
   it('should handle empty list of articles', () => {
     const mockEmptyList: ArticleModel[] = [];
-
     service.getList().subscribe((data) => {
       expect(data).toEqual(mockEmptyList);
     });
-
     const req = httpTestingController.expectOne('../assets/json/list.json');
     expect(req.request.method).toBe('GET');
     req.flush(mockEmptyList);
@@ -94,12 +87,10 @@ describe('AppService', () => {
 
   it('should handle errors when fetching login data', () => {
     const errorMessage = 'Failed to load login data';
-
     service.getLoginData().subscribe({
       next: () => fail('Expected an error, not data'),
       error: (error) => expect(error.statusText).toBe('Server Error'),
     });
-
     const req = httpTestingController.expectOne(
       '../assets/json/login-data.json'
     );
@@ -108,12 +99,10 @@ describe('AppService', () => {
 
   it('should handle errors when fetching list of articles', () => {
     const errorMessage = 'Failed to load articles';
-
     service.getList().subscribe({
       next: () => fail('Expected an error, not data'),
       error: (error) => expect(error.statusText).toBe('Server Error'),
     });
-
     const req = httpTestingController.expectOne('../assets/json/list.json');
     req.flush(errorMessage, { status: 500, statusText: 'Server Error' });
   });

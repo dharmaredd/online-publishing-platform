@@ -1,9 +1,10 @@
 <div class="container-fluid mt-3">
   <div class="row">
-    <div class="row ">
+    <div class="row">
       <div class="col-10">
-        <h3><i class="bi bi-arrow-left me-3 cursor-point" title="Back" (click)="cancel()"></i>Create Article</h3>
-
+        <h3>
+          <i class="bi bi-arrow-left me-3 cursor-point" title="Back" (click)="cancel()"></i>Create Article
+        </h3>
       </div>
       <div class="col-1">
         <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
@@ -14,9 +15,7 @@
         </button>
       </div>
     </div>
-
   </div>
-
   <div class="row m-4">
     <form [formGroup]="articleForm">
       <div class="row pb-3">

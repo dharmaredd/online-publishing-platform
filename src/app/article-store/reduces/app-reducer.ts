@@ -10,9 +10,7 @@ import {
 export interface AppState {
   articleList: Array<ArticleModel>;
 }
-
 export const initialState: AppState = { articleList: [] };
-
 export const articleReducer = createReducer(
   initialState,
   on(getListSuccess, (state, { articleList }) => ({

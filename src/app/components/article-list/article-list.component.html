@@ -17,19 +17,58 @@
         <span class="navbar-text">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <span class="nav-link">
-                <i class="bi bi-bell position-relative me-4"><span
-                    class="position-absolute badge rounded rounded-circle bg-danger">2</span></i>
+              <span class="nav-link " (click)="showNotification()">
+                <i class="bi bi-bell position-relative me-4 cursor-point ">
+                  <span class="position-absolute badge rounded rounded-circle bg-danger">2</span></i>
               </span>
+              <div #navbarSupportedContent>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown ">
+                    <a class="nav-link " id="navbarDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-bell"></i>
+                      <span class="unread-notification"></span>
+                    </a>
+                    <div class="dropdown-menu notification-ui_dd show" aria-labelledby="navbarDropdown">
+                      <div class="notification-ui_dd-header">
+                        <h3 class="text-center">Notification</h3>
+                      </div>
+                      <div class="notification-ui_dd-content">
+                        <div class="notification-list notification-list--unread">
+
+                          <div class="notification-list_detail">
+                            <p><b>John Doe</b> reacted to your post</p>
+                            <p><small>10 mins ago</small></p>
+                          </div>
+
+                          <div class="notification-list_detail">
+                            <p><b>Bhanu</b> reacted to your post</p>
+                            <p><small>1 hour ago</small></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="notification-ui_dd-footer">
+                        <a class="btn btn-success w-100" (click)="closeNotification()">Close</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <a class="nav-link" routerLink="/create-article">{{postarticle}}</a>
+            </li>
+            <li class="nav-item ml-2">
+              <div class="notification-list_img">
+                <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+              </div>
             </li>
           </ul>
         </span>
       </div>
     </div>
   </nav>
+
 </div>
 <div>
   <div class="text-center mt-2 mb-2">

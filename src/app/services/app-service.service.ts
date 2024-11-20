@@ -7,10 +7,13 @@ import { ArticleModel } from '../models/artilcle-model';
   providedIn: 'root',
 })
 export class AppService {
+  backUrl: string = '/list';
   constructor(private http: HttpClient) {}
+
   getLoginData(): Observable<any> {
     return this.http.get('../assets/json/login-data.json');
   }
+
   getList(): Observable<ArticleModel[]> {
     return this.http.get('../assets/json/list.json').pipe(
       map((res: any) => {

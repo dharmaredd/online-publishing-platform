@@ -14,6 +14,7 @@ import {
   articleListFilterData,
 } from '../../article-store/selectors/app.selector';
 import { ToastrService } from 'ngx-toastr';
+import { AppService } from '../../services/app-service.service';
 
 @Component({
   selector: 'app-article-list',
@@ -22,6 +23,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ArticleListComponent implements OnInit {
   @ViewChild('commentPopup') commentPopup: ElementRef | undefined;
+  @ViewChild('navbarSupportedContent') navbarSupportedContent:
+    | ElementRef
+    | undefined;
   articleName = 'Online Publishing Platform';
   postarticle = 'Post Article';
   page: number = 0;
@@ -30,20 +34,26 @@ export class ArticleListComponent implements OnInit {
   commentFormGroup!: FormGroup;
   filterBy: string = 'ALL';
   artList$: Observable<ArticleModel[]> = this.store.select(articleListData);
+
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private appService: AppService
   ) {}
 
   ngOnInit(): void {
     this.commentFormGroup = this.fb.group({
       comment: [],
     });
+    setTimeout(() => {
+      this.closeNotification();
+    });
   }
 
-  titleClick(data: any) {
+  titleClick(data: ArticleModel) {
+    this.appService.backUrl = '/list';
     this.router.navigate(['/view-article', data.id]);
   }
 
@@ -60,7 +70,7 @@ export class ArticleListComponent implements OnInit {
       image: data.image,
     };
     this.store.dispatch(updatebookmarkArticle({ article: obj }));
-    this.toastr.success('Sucess', 'Bookmark Added Sucessfully!!');
+    this.toastr.success('', `Bookmark ${ obj.isBookmark ? 'Added' : 'Removed'} Sucessfully!!`);
   }
 
   handleFilter(event: any) {
@@ -83,6 +93,7 @@ export class ArticleListComponent implements OnInit {
     }
     this.commentData = data;
   }
+
   commentSubmit(): void {
     let value = this.commentFormGroup.get('comment')?.value;
     if (value && this.commentPopup && this.commentData.id) {
@@ -104,7 +115,20 @@ export class ArticleListComponent implements OnInit {
       this.toastr.success('Sucess', 'Comment Added Sucessfully!!');
     }
   }
+
   exploreClick() {
     this.router.navigate(['/explore-article']);
+  }
+
+  showNotification(): void {
+    if (this.navbarSupportedContent) {
+      this.navbarSupportedContent.nativeElement.style.display = 'block';
+    }
+  }
+
+  closeNotification(): void {
+    if (this.navbarSupportedContent) {
+      this.navbarSupportedContent.nativeElement.style.display = 'none';
+    }
   }
 }

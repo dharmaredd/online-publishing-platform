@@ -1,1 +1,5 @@
-@import 'ngx-toastr/toastr';
+@import "ngx-toastr/toastr";
+
+.cursor-point {
+  cursor: pointer;
+}

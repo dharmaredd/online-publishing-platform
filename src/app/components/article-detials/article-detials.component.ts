@@ -13,27 +13,33 @@ import {
   articleListData,
   articleByIdData,
 } from '../../article-store/selectors/app.selector';
+import { AppService } from '../../services/app-service.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-article-detials',
   templateUrl: './article-detials.component.html',
   styleUrl: './article-detials.component.css',
 })
 export class ArticleDetialsComponent implements OnInit {
-  articleDetails!: ArticleModel;
   @ViewChild('commentsPopup') commentPopup: ElementRef | undefined;
+  articleDetails!: ArticleModel;
   id!: number;
   bookmarkData: any;
   carousalList: any[] = [];
   articleList: any;
   commentFormGroup!: FormGroup;
-  articleDetails$!: Observable<any>;
+  articleDetails$: Observable<ArticleModel> | undefined;
   artList$: Observable<ArticleModel[]> = this.store.select(articleListData);
+
   constructor(
     private fb: FormBuilder,
     private route: Router,
     private store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private appService: AppService,
+    private toastr: ToastrService,
   ) {}
+
   ngOnInit(): void {
     this.carousalList = [];
     this.commentFormGroup = this.fb.group({
@@ -42,7 +48,9 @@ export class ArticleDetialsComponent implements OnInit {
     this.activatedRoute.params.subscribe((param) => {
       if (param) {
         this.id = parseInt(param?.['id']);
-        this.articleDetails$ = this.store.select(articleByIdData(this.id));
+        this.store.select(articleByIdData(this.id)).subscribe((res) => {
+          this.articleDetails$ = res ? of(res) : undefined;
+        });
         this.store.select(articleListData).subscribe((res) => {
           let data = res.find((ele) => ele.id === this.id);
           this.articleDetails = data!!;
@@ -76,10 +84,11 @@ export class ArticleDetialsComponent implements OnInit {
     setTimeout(() => {
       this.bookmarkData = {};
     }, 2000);
+    this.toastr.success('', `Bookmark ${ obj.isBookmark ? 'Added' : 'Removed'} Sucessfully!!`);
   }
 
   back() {
-    this.route.navigate(['/list']);
+    this.route.navigate([this.appService.backUrl]);
   }
 
   recommondedClick(id: number) {
@@ -113,6 +122,7 @@ export class ArticleDetialsComponent implements OnInit {
       this.commentFormGroup.get('comment')?.setValue('');
       this.commentPopup.nativeElement.style.display = 'none';
       this.bookmarkData = {};
+      this.toastr.success('', 'Comment Added Sucessfully!!');
     }
   }
 

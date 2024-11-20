@@ -1,43 +1,36 @@
-<div class="row m-3 " *ngIf="articleDetails">
+<div class="row m-3" *ngIf="articleDetails">
   <div class="col-1">
-    <i class="bi bi-arrow-left mx-3 h3 cursorpoint" title="Back" (click)="back()"></i>
+    <i class="bi bi-arrow-left mx-3 h3 cursor-point" title="Back" (click)="back()"></i>
   </div>
   <div class="col-11">
     <h3>
-      <span data-toggle="tooltip" data-placement="bottom"
-        title="{{articleDetails.title}}">{{articleDetails.title}}</span>
+      <span data-toggle="tooltip" data-placement="bottom" title="{{ articleDetails.title }}">{{ articleDetails.title
+        }}</span>
     </h3>
   </div>
 </div>
 <div>
-  <div class="container container1 w-50">
+  <div class="container container1 w-75">
     <div class="row">
       <div class="blog-post" [innerHtml]="articleDetails.article"></div>
     </div>
     <hr />
     <div class="row">
       <div class="col-12 mt-2 d-flex justify-content-center align-items-center">
-        <!-- Author with Icon -->
         <span class="d-flex align-items-center me-4 icon-text-group">
           <i class="bi bi-person-fill icon"></i>
-          <span class="text">{{articleDetails.author}}</span>
+          <span class="text">{{ articleDetails.author }}</span>
         </span>
-
-        <!-- Views with Icon -->
         <span class="d-flex align-items-center me-4 icon-text-group">
           <i class="bi bi-eye-fill icon"></i>
-          <span class="text">{{articleDetails.views}}</span>
+          <span class="text">{{ articleDetails.views }}</span>
         </span>
-
-        <!-- Comments with Icon -->
-        <span class="d-flex align-items-center me-4 icon-text-group cursorpoint" (click)="commentClick(articleDetails)"
+        <span class="d-flex align-items-center me-4 icon-text-group cursor-point" (click)="commentClick(articleDetails)"
           *ngIf="articleDetails?.commentDetails">
           <i class="bi bi-chat-left-text-fill icon"></i>
-          <span class="text">{{articleDetails.commentDetails.length}}</span>
+          <span class="text">{{ articleDetails.commentDetails.length }}</span>
         </span>
-
-        <!-- Bookmark Icon (Conditional) -->
-        <span class="icon-text-group cursorpoint">
+        <span class="icon-text-group cursor-point">
           <i *ngIf="!articleDetails?.isBookmark" (click)="isBookMark(articleDetails)"
             class="bi bi-bookmark icon me-4"></i>
           <i *ngIf="articleDetails?.isBookmark" (click)="isBookMark(articleDetails)"
@@ -47,44 +40,39 @@
     </div>
   </div>
 </div>
-
-<!--carousel-->
 <section class="pt-5 pb-5">
   <div class="container">
     <div class="row">
       <div class="col-6">
-        <h3 class="mb-3">Recommanded to YOu </h3>
+        <h3 class="mb-3">Recommanded to YOu</h3>
       </div>
-
       <div class="col-12">
         <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row">
-
-                <div class="col-md-4 mb-3" *ngFor="let data of carousalList | slice:0:3">
+                <div class="col-md-4 mb-3" *ngFor="let data of carousalList | slice : 0 : 3">
                   <div class="card hight-img">
-                    <img class="card-img-top cardimg" src="{{data?.image}}">
+                    <img class="card-img-top cardimg" src="{{ data?.image }}" />
                     <div class="card-body d-flex flex-column column-height">
-                      <h4 class="card-text overflow-text cursorpoint" (click)="recommondedClick(data?.id)">
-                        {{data?.title}}</h4>
+                      <h4 class="card-text overflow-text cursor-point" (click)="recommondedClick(data?.id)">
+                        {{ data?.title }}
+                      </h4>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
             <div class="carousel-item">
               <div class="row">
-
-                <div class="col-md-4 mb-3" *ngFor="let data of carousalList | slice:3:6">
+                <div class="col-md-4 mb-3" *ngFor="let data of carousalList | slice : 3 : 6">
                   <div class="card">
-                    <img class="card-img-top cardimg" src="{{data?.image}}">
+                    <img class="card-img-top cardimg" src="{{ data?.image }}" />
                     <div class="card-body">
-                      <h4 class="card-title cursorpoint" (click)="recommondedClick(data?.id)">{{data?.title}}</h4>
+                      <h4 class="card-title cursor-point" (click)="recommondedClick(data?.id)">
+                        {{ data?.title }}
+                      </h4>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -100,14 +88,11 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
-
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- comment Modal View -->
 <div class="modal" #commentsPopup>
   <div class="modal-dialog">
     <div class="modal-content">

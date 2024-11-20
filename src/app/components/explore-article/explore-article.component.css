@@ -19,3 +19,16 @@
   height: 150px;
   object-fit: cover;
 }
+
+.overflow-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+
+.cards-width{
+  width: 200px;
+}

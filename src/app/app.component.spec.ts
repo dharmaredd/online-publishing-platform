@@ -2,18 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { list } from './article-store/actions/app-action.action';
+import { RouterModule } from '@angular/router';
 
 describe('AppComponent', () => {
   let mockStore: jasmine.SpyObj<Store>;
 
   beforeEach(async () => {
     mockStore = jasmine.createSpyObj('Store', ['dispatch']);
-
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      providers: [
-        { provide: Store, useValue: mockStore }, 
-      ],
+      imports: [RouterModule],
+      providers: [{ provide: Store, useValue: mockStore }],
     }).compileComponents();
   });
 
@@ -34,9 +33,9 @@ describe('AppComponent', () => {
     expect(mockStore.dispatch).toHaveBeenCalledWith(list());
   });
 
-  it('should clear localStorage on initialization', () => {
-    spyOn(localStorage, 'clear'); 
+  it('should clear sessionStorage on initialization', () => {
+    spyOn(sessionStorage, 'clear');
     TestBed.createComponent(AppComponent);
-    expect(localStorage.clear).toHaveBeenCalled();
+    expect(sessionStorage.clear).toHaveBeenCalled();
   });
 });
