@@ -39,7 +39,6 @@ describe('LoginComponent', () => {
         { provide: AppService, useValue: mockAppService },
       ],
     }).compileComponents();
-
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -71,7 +70,7 @@ describe('LoginComponent', () => {
       'Login Sucessfully!!'
     );
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/list']);
-    expect(localStorage.getItem('isLogin')).toBe('true');
+    expect(sessionStorage.getItem('isLogin')).toBe('true');
   });
 
   it('should fail login with invalid credentials', () => {
@@ -91,7 +90,6 @@ describe('LoginComponent', () => {
     component.isLogIn = true;
     component.onRegistor();
     expect(component.isLogIn).toBeFalse();
-
     component.onRegistor();
     expect(component.isLogIn).toBeTrue();
   });
@@ -113,7 +111,7 @@ describe('LoginComponent', () => {
       email: 'newuser@example.com',
       password: 'newuser123',
     });
-    expect(localStorage.getItem('loginData')).toContain(
+    expect(sessionStorage.getItem('loginData')).toContain(
       '"email":"newuser@example.com"'
     );
   });

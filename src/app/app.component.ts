@@ -11,6 +11,6 @@ export class AppComponent {
   title = 'online-publishing-platform';
   constructor(private store: Store) {
     this.store.dispatch(list());
-    localStorage.clear();
+    sessionStorage.clear();
   }
 }

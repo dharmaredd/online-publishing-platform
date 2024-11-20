@@ -11,10 +11,6 @@
   white-space: nowrap;
 }
 
-.cursorpoint {
-  cursor: pointer;
-}
-
 .icon-text-group {
   display: flex;
   align-items: center;
@@ -40,10 +36,12 @@
   overflow-x: hidden;
   overflow-y: scroll;
 }
+
 .cardimg {
   height: 150px;
   width: 230px;
 }
+
 .column-height {
   height: 150px;
 }

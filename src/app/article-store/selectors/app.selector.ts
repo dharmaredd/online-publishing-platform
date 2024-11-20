@@ -4,8 +4,8 @@ import {
   MemoizedSelector,
 } from '@ngrx/store';
 import { AppState } from '../reduces/app-reducer';
+import { ArticleModel } from '../../models/artilcle-model';
 
-// Get complete state of the favorites products in application
 export const selectAppState = createFeatureSelector<AppState>('articleList');
 
 export const articleListData = createSelector(
@@ -23,6 +23,8 @@ export const articleListFilterData = (filterBy: string) =>
   );
 
 export const articleByIdData = (id: number) =>
-  createSelector(selectAppState, (state: AppState) =>
-    state.articleList.find((ele: any) => ele.id === id)
+  createSelector(selectAppState, (articleList) =>
+    articleList.articleList.find((ele: ArticleModel) => {
+      return ele.id === id;
+    })
   );

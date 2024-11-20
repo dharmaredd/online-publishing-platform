@@ -16,6 +16,7 @@ export class LoginComponent {
   isExistuser: boolean = true;
   loginData: any;
   isMailIdAvailable: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -27,8 +28,8 @@ export class LoginComponent {
     this.createLoginForm();
     this.createRegistorForm();
     this.appService.getLoginData().subscribe((res) => {
-      localStorage.setItem('loginData', JSON.stringify(res));
-      this.loginData = localStorage.getItem('loginData');
+      sessionStorage.setItem('loginData', JSON.stringify(res));
+      this.loginData = sessionStorage.getItem('loginData');
       this.loginData = JSON.parse(this.loginData);
     });
   }
@@ -70,7 +71,7 @@ export class LoginComponent {
       : false;
     if (this.isExistuser) {
       this.toastr.success('Sucess', 'Login Sucessfully!!');
-      localStorage.setItem('isLogin', 'true');
+      sessionStorage.setItem('isLogin', 'true');
       this.router.navigate(['/list']);
     } else {
       this.toastr.error('Failed', 'Login Failed!!');
@@ -84,8 +85,8 @@ export class LoginComponent {
   onSubmitReg(): void {
     this.isLogIn = !this.isLogIn;
     this.loginData.push(this.registorForm.value);
-    localStorage.removeItem('loginData');
-    localStorage.setItem('loginData', JSON.stringify(this.loginData));
+    sessionStorage.removeItem('loginData');
+    sessionStorage.setItem('loginData', JSON.stringify(this.loginData));
     this.toastr.success('Sucess', 'Register Sucessfully!!');
   }
 

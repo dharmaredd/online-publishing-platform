@@ -37,7 +37,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AngularEditorModule,
     StoreModule.forRoot({ articleList: articleReducer }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([AppEffects]),
     ToastrModule.forRoot(),
   ],
