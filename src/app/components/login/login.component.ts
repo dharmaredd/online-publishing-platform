@@ -102,7 +102,7 @@ export class LoginComponent {
     let isExist = this.loginData.find((ele: any) => ele.email == enteredMail);
     console.log(isExist);
     this.isMailIdAvailable = isExist ? true : false;
-    this.registorForm.get('email')?.setValue('');
+    //this.registorForm.get('email')?.setValue('');
     if (this.isMailIdAvailable) {
       this.toastr.info('Information', 'mail exist try with other mail Id !!');
     }

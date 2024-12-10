@@ -131,7 +131,6 @@ describe('LoginComponent', () => {
     component.registorForm.get('email')?.setValue('test@example.com');
     component.isEmailAlreadyEixst();
     expect(component.isMailIdAvailable).toBeTrue();
-    expect(component.registorForm.get('email')?.value).toBe('');
     expect(mockToastrService.info).toHaveBeenCalledWith(
       'Information',
       'mail exist try with other mail Id !!'

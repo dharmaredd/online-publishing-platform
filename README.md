@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 <!-- 
 access the application through this link  
-https://online-publishing-platform-6c1x3z7jz-dharmaredds-projects.vercel.app/login -->
+https://online-publishing-platform.vercel.app/login -->
